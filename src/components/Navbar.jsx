@@ -2,6 +2,9 @@ import { Badge } from "@material-ui/core";
 import { Search, ShoppingCartOutlined } from "@material-ui/icons";
 import React from "react";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
+
 
 
 const Container = styled.div`
@@ -66,31 +69,34 @@ const MenuItem = styled.div`
 `;
 
 const Navbar = () => {
-    return (
-      <Container>
-        <Wrapper>
-          <Left>
-            <Language>EN</Language>
-            <SearchContainer>
-              <Input placeholder="Search" />
-              <Search style={{ color: "gray", fontSize: 16 }} />
-            </SearchContainer>
-          </Left>
-          <Center>
-            <Logo>FurNitcho</Logo>
-          </Center>
-          <Right>
-            <MenuItem>REGISTER</MenuItem>
-            <MenuItem>SIGN IN</MenuItem>
-            <MenuItem>
-              <Badge badgeContent={4} color="primary">
-                <ShoppingCartOutlined />
-              </Badge>
-            </MenuItem>
-          </Right>
-        </Wrapper>
-      </Container>
-    );
-  };
-  
-  export default Navbar;
+  const quantity = useSelector(state=>state.cart.quantity)
+  return (
+    <Container>
+      <Wrapper>
+        <Left>
+          <Language>EN</Language>
+          <SearchContainer>
+            <Input placeholder="Search" />
+            <Search style={{ color: "gray", fontSize: 16 }} />
+          </SearchContainer>
+        </Left>
+        <Center>
+          <Logo>LAMA.</Logo>
+        </Center>
+        <Right>
+          <MenuItem>REGISTER</MenuItem>
+          <MenuItem>SIGN IN</MenuItem>
+          <Navigate to="/cart">
+          <MenuItem>
+            <Badge badgeContent={quantity} color="primary">
+              <ShoppingCartOutlined />
+            </Badge>
+          </MenuItem>
+          </Navigate>
+        </Right>
+      </Wrapper>
+    </Container>
+  );
+};
+
+export default Navbar;

@@ -8,16 +8,17 @@ import Cart from "./pages/Cart";
 import {
   BrowserRouter as Router,
   Route,
-  Navigate,
+  // Navigate,
 } from "react-router-dom";
 import { Routes } from 'react-router-dom';
 
 const App = () => {
-  const user = true;
   return (
     <Router>
       <Routes>
+        <Route exact path="/" element={<Home/>} /> 
       <Route  path="/products/:category" element={<ProductList />} /> 
+      <Route  path="/products" element={<ProductList />} /> 
       {/* <Route  path="/products/:id" element={<Product/>} />  */}
       <Route  path="/cart" element={<Cart/>}/> 
        
@@ -26,10 +27,11 @@ const App = () => {
         {/* <Route path="/success">
           <Success />
         </Route> */}
-        <Route path="/login" element={user ? <Navigate to="/login" /> : <Login />} />
-        {/* <Route path="/login">{user ? <Navigate to="/" /> : <Login />}</Route> */}
-        <Route path="/register" element ={user ? <Navigate to="/register" /> : <Register />}/>
-        <Route exact path="/" element={<Home/>} /> 
+        {/* <Route path="/login" element={user ? <Navigate to="/login" /> : <Login />} /> */}
+        <Route path="/login" element={ <Login />}/>
+        {/* <Route path="/register" element ={user ? <Navigate to="/register" /> : <Register />}/> */}
+        <Route path="/register" element ={<Register />}/>
+        
       </Routes>
     </Router>
   )
